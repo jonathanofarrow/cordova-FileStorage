@@ -13,18 +13,18 @@ Install with Cordova CLI
 JavaScript API
 --------------
 
-The API is accessible via the global object `FileStorage`. After the `deviceready` event has been fired, the functions can be accessed as the fields of this object:
+The API is accessible via the global object `fileStorage`. After the `deviceready` event has been fired, the functions can be accessed as the fields of this object:
 ```
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady () {
-    console.log(FileStorage);
+    console.log(fileStorage);
 }
 ```
 
 __open__
 
 After this, a storage URI can be obtained from the user by calling
-```FileStorage.open(success, error);```
+```fileStorage.open(success, error);```
 
 It displays a choice to the user to open a file from android's standard file choosing dialog or the Dropbox app. After the user chooses, one of the callback functions is called with the result
 
@@ -43,7 +43,7 @@ The uri returned to the ```success``` function is a string representation of eit
 __readFromUri__
 To read the content of a file with the obtained uri call:
 ```
-FileStorage.readFromUri(success, error, uri)
+fileStorage.readFromUri(success, error, uri)
 ```
 One of the callback functions will be called with the result:
 ```
@@ -59,7 +59,7 @@ function error (errorMsg) {
 __writeToUri__
 To overwrite the content of a file with the obtained uri call:
 ```
-FileStorage.writeToUri(success, error, uri, data)
+fileStorage.writeToUri(success, error, uri, data)
 ```
 The parameter `data` is a string which will be the content of the file described by uri on success. One of the callback functions will be called with the result:
 ```
@@ -75,7 +75,7 @@ function error (errorMsg) {
 __appendToUri__
 To append a string to the content of a file with the obtained uri call:
 ```
-FileStorage.appendToUri(success, error, uri, data)
+fileStorage.appendToUri(success, error, uri, data)
 ```
 One of the callback functions will be called with the result:
 ```
