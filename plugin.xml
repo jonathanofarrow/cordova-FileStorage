@@ -9,7 +9,7 @@
         <engine name="cordova" version=">=2.8.0" />
     </engines>
 
-    <name>File Chooser</name>
+    <name>File Storage</name>
     <description>Plugin to let the user choose a file, read the content and write/append to it.</description>
     <keywords>File, Chooser, Open, Write, Read</keywords>
     <author>Daniel Franzen</author>
