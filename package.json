@@ -1,0 +1,23 @@
+{
+    "name": "cordova-plugin-filestorage",
+    "version": "0.0.1",
+    "description": "FileStorage plugin for Cordova. Available for Android.",
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/DFranzen/cordova-FileStorage.git"
+    },
+    "keywords": [
+	"cordova",
+	"phonegap",
+	"cordova-android",
+	"filestorage",
+	"filepicker",
+	"ecosystem:cordova"
+    ],
+    "author": "Daniel Franzen <daniel.franzen.blubb@gmail.com> (https://dfranzen.github.io/)",
+    "license": "MIT",
+    "bugs": {
+	"url": "https://github.com/DFranzen/cordova-FileStorage/issues"
+    },
+    "homepage": "https://github.com/DFranzen/cordova-FileStorage#readme"
+}
