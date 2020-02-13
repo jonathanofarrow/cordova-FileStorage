@@ -2,9 +2,6 @@ module.exports = {
     open: function (success, failure) {
         window.cordova.exec(success, failure, "FileStorage", "open", []);
     },
-    openPath: function (success, failure) {
-        window.cordova.exec(success, failure, "FileStorage", "open_path", []);
-        },
     readFromUri: function (success, failure, uri) {
         window.cordova.exec(success, failure, "FileStorage", "read_from_uri", [uri]);
     },
