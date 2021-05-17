@@ -55,7 +55,7 @@ public class FileStorage extends CordovaPlugin {
     public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals(ACTION_OPEN)) {
-            chooseFile(callbackContext);
+            chooseFile(callbackContext, args.getString(0));
             return true;
 	} else if (action.equals(ACTION_WRITE_TO_URI)) {
 	    Uri uri = Uri.parse(args.getString(0));
@@ -146,18 +146,18 @@ public class FileStorage extends CordovaPlugin {
 	}
     }
     
-    public void chooseFile(CallbackContext callbackContext) {
+    public void chooseFile(CallbackContext callbackContext, String type) {
 	Intent pickIntent = new Intent(Intent.ACTION_PICK);
-	pickIntent.setType("text/*");
+	pickIntent.setType(type);
 	pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
 	
 	Intent dropboxIntent = new Intent(Intent.ACTION_GET_CONTENT);
 	dropboxIntent.setPackage("com.dropbox.android");
-	dropboxIntent.setType("text/*");
+	dropboxIntent.setType(type);
 	dropboxIntent.addCategory(Intent.CATEGORY_OPENABLE);
 
 	Intent documentIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT); //ACTION_CREATE_DOCUMENT);  //ACTION_OPEN_DOCUMENT  //ACTION_GET_CONTENT
-	documentIntent.setType("text/*");
+	documentIntent.setType(type);
         documentIntent.addCategory(Intent.CATEGORY_OPENABLE);
 	
 	Intent chooserIntent = Intent.createChooser(pickIntent, "Select a file to add");
