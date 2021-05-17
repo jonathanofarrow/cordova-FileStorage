@@ -8,7 +8,7 @@ Install
 
 Install with Cordova CLI
 
-```$ cordova plugin add https://github.com/DFranzen/cordova-FileStorage.git```
+```$ cordova plugin add https://github.com/jonathanofarrow/cordova-FileStorage.git```
 
 JavaScript API
 --------------
