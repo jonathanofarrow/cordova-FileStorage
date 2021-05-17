@@ -1,4 +1,4 @@
-package com.ofarrow.cordova;
+package com.dfranzen.cordova;
 
 import java.io.InputStream;
 import java.io.OutputStream;
