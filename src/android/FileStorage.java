@@ -20,7 +20,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
+import android.widget.TextView;
 
 
 import org.apache.cordova.CordovaArgs;
@@ -28,6 +30,8 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 
 public class FileStorage extends CordovaPlugin {
@@ -173,27 +177,41 @@ public class FileStorage extends CordovaPlugin {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	if (callback == null) {
-	    return;
-	}
+		if (callback == null) {
+			return;
+		}
 
-	if (resultCode != RESULT_OK) {
-	    callback.error(resultCode);
-	    return; 
-	}
-	
-	Uri uri = data.getData();
-	if (uri.getScheme() == "content") {
-	    final int takeFlags = data.getFlags()
-		& (Intent.FLAG_GRANT_READ_URI_PERMISSION
-		   | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-	    // Check for the freshest data.
-	    final Context context = this.cordova.getActivity();
-	    context.getContentResolver().takePersistableUriPermission(uri, takeFlags);
-	}
+		if (resultCode != RESULT_OK) {
+			callback.error(resultCode);
+			return;
+		}
+
+		Uri uri = data.getData();
+		if (uri.getScheme() == "content") {
+			final int takeFlags = data.getFlags()
+			& (Intent.FLAG_GRANT_READ_URI_PERMISSION
+			   | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+			// Check for the freshest data.
+			final Context context = this.cordova.getActivity();
+			context.getContentResolver().takePersistableUriPermission(uri, takeFlags);
+		}
 
         if (requestCode == PICK_FILE_REQUEST) {
-	    callback.success(uri.toString());
+			final Context context = this.cordova.getActivity();
+        	Cursor returnCursor = context.getContentResolver().query(uri, null, null, null, null);
+        	String mimeType = context.getContentResolver().getType(uri);
+        	int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        	returnCursor.moveToFirst();
+        	String fileName = returnCursor.getString(nameIndex);
+			JSONObject object = new JSONObject();
+			try {
+				object.put("uri", uri.toString());
+				object.put("name", fileName);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			callback.success(object);
         }
     }
 }
